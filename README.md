@@ -4,7 +4,20 @@ This repository contains various programming projects and learning exercises.
 
 ## Projects
 
-### 1. Hyperscaler Status Monitor
+### 1. SystemHelper
+A web-based system monitoring and network diagnostics tool with real-time system information.
+
+**Features:**
+- Real-time CPU and Memory usage monitoring
+- Process inspection and management
+- Network port monitoring
+- Network diagnostics (ping, MTR, DNS)
+- Beautiful web interface with auto-refresh
+- Cross-platform support (macOS/Linux)
+
+**Location:** `hd-gocode/SystemHelper/`
+
+### 2. Hyperscaler Status Monitor
 A real-time status monitoring tool for major cloud providers (Google, Oracle Cloud, and Azure) with a beautiful web interface.
 
 **Features:**
@@ -17,7 +30,7 @@ A real-time status monitoring tool for major cloud providers (Google, Oracle Clo
 
 **Location:** `hd-gocode/hyperscaler/`
 
-### 2. Website Monitor
+### 3. Website Monitor
 A Go program that monitors website status and provides real-time updates.
 
 **Features:**
@@ -27,7 +40,7 @@ A Go program that monitors website status and provides real-time updates.
 
 **Location:** `hd-gocode/website_monitor/`
 
-### 3. Go Learning Exercises
+### 4. Go Learning Exercises
 Basic Go programming exercises and examples.
 
 **Location:** `hd-gocode/`
