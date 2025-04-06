@@ -17,7 +17,20 @@ A web-based system monitoring and network diagnostics tool with real-time system
 
 **Location:** `hd-gocode/SystemHelper/`
 
-### 2. Hyperscaler Status Monitor
+### 2. Eye Tracker
+A computer vision application that tracks eye movements to control an on-screen block, demonstrating real-time image processing and user interaction.
+
+**Features:**
+- Real-time eye tracking using webcam
+- Interactive block movement based on eye position
+- Face and eye detection using OpenCV
+- Cross-platform support (macOS/Linux)
+- Adjustable tracking sensitivity
+- Visual feedback and debugging tools
+
+**Location:** `hd-gocode/eyetracker/`
+
+### 3. Hyperscaler Status Monitor
 A real-time status monitoring tool for major cloud providers (Google, Oracle Cloud, and Azure) with a beautiful web interface.
 
 **Features:**
@@ -30,7 +43,7 @@ A real-time status monitoring tool for major cloud providers (Google, Oracle Clo
 
 **Location:** `hd-gocode/hyperscaler/`
 
-### 3. Website Monitor
+### 4. Website Monitor
 A Go program that monitors website status and provides real-time updates.
 
 **Features:**
@@ -40,7 +53,7 @@ A Go program that monitors website status and provides real-time updates.
 
 **Location:** `hd-gocode/website_monitor/`
 
-### 4. Go Learning Exercises
+### 5. Go Learning Exercises
 Basic Go programming exercises and examples.
 
 **Location:** `hd-gocode/`
