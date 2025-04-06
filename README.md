@@ -58,6 +58,18 @@ A computer vision application that tracks eye movements to control an on-screen 
 
 **Location:** `hd-gocode/eyetracker/`
 
+### 6. Spinninnpong
+A unique twist on the classic Pong game featuring spinning paddles and dynamic ball physics.
+
+**Features:**
+- Spinning paddles that add variable spin effects
+- Real-time physics calculations
+- Progressive difficulty system
+- Two-player keyboard controls
+- Clean, minimalist graphics
+
+**Location:** `hd-gocode/spinninnpong/`
+
 ## Getting Started
 
 Each project has its own README with specific instructions. Navigate to the project directory for detailed information.
