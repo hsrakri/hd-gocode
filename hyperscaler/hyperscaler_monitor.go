@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"html/template"
 	"io"
@@ -42,6 +43,7 @@ type StatusReport struct {
 	Timestamp  time.Time
 	SystemInfo SystemInfo
 	Providers  []Provider
+	Content    string
 }
 
 // HTML template for the status report
@@ -141,6 +143,39 @@ const htmlTemplate = `
         .provider-link:hover {
             text-decoration: underline;
         }
+        .tab-container {
+            margin-bottom: 20px;
+        }
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tab-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #e9ecef;
+            color: #333;
+        }
+        .tab-button.active {
+            background-color: #4caf50;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -155,39 +190,154 @@ const htmlTemplate = `
             <p><strong>Google Ping Latency:</strong> {{.SystemInfo.PingLatency}}</p>
             <p><strong>Last Network Check:</strong> {{.SystemInfo.LastCheck.Format "15:04:05 MST"}}</p>
         </div>
-        {{range .Providers}}
-        <div class="provider-header">
-            {{.Name}}
-            <a href="{{.URL}}" target="_blank" class="provider-link">View Official Status Page</a>
-        </div>
-        <table class="status-table">
-            <thead>
-                <tr>
-                    <th>Service</th>
-                    <th>Status</th>
-                    <th>Region</th>
-                    <th>Details</th>
-                    <th>Last Check</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{range .Services}}
-                <tr>
-                    <td>{{.Name}}</td>
-                    <td class="{{if eq .Status "UP"}}status-up{{else}}status-down{{end}}">{{.Status}}</td>
-                    <td>{{.Region}}</td>
-                    <td>{{.Details}}</td>
-                    <td>{{.LastCheck.Format "15:04:05 MST"}}</td>
-                </tr>
+        <div class="tab-container">
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="showTab('status')">Status</button>
+                <button class="tab-button" onclick="showTab('refresh')">Refresh</button>
+            </div>
+            <div id="status-tab" class="tab-content active">
+                {{range .Providers}}
+                <div class="provider-header">
+                    {{.Name}}
+                    <a href="{{.URL}}" target="_blank" class="provider-link">View Official Status Page</a>
+                </div>
+                <table class="status-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Status</th>
+                            <th>Region</th>
+                            <th>Details</th>
+                            <th>Last Check</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{range .Services}}
+                        <tr>
+                            <td>{{.Name}}</td>
+                            <td class="{{if eq .Status "UP"}}status-up{{else}}status-down{{end}}">{{.Status}}</td>
+                            <td>{{.Region}}</td>
+                            <td>{{.Details}}</td>
+                            <td>{{.LastCheck.Format "15:04:05 MST"}}</td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                </table>
                 {{end}}
-            </tbody>
-        </table>
-        {{end}}
-        <button class="refresh-button" onclick="location.reload()">Refresh Now</button>
+            </div>
+            <div id="refresh-tab" class="tab-content">
+                <div class="loading" id="refresh-loading">Refreshing status data...</div>
+                <button class="refresh-button" onclick="refreshStatus()">Refresh Now</button>
+            </div>
+        </div>
     </div>
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function refreshStatus() {
+            const loading = document.getElementById('refresh-loading');
+            loading.style.display = 'block';
+            
+            fetch('/refresh')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Error refreshing status: ' + data.error);
+                    }
+                })
+                .catch(error => {
+                    alert('Error refreshing status: ' + error);
+                })
+                .finally(() => {
+                    loading.style.display = 'none';
+                });
+        }
+    </script>
 </body>
 </html>
 `
+
+var currentReport StatusReport
+var reportMutex sync.RWMutex
+
+func handleRefresh(w http.ResponseWriter, r *http.Request) {
+	report := generateReport()
+	reportMutex.Lock()
+	currentReport = report
+	reportMutex.Unlock()
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"success": true,
+	})
+}
+
+func handleStatus(w http.ResponseWriter, r *http.Request) {
+	reportMutex.RLock()
+	defer reportMutex.RUnlock()
+
+	tmpl, err := template.New("status").Parse(htmlTemplate)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if err := tmpl.Execute(w, currentReport); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
+func main() {
+	// Create templates directory if it doesn't exist
+	if err := os.MkdirAll("templates", 0755); err != nil {
+		log.Fatal(err)
+	}
+
+	// Generate initial report
+	currentReport = generateReport()
+
+	// Set up HTTP handlers
+	http.HandleFunc("/", handleRoot)
+	http.HandleFunc("/refresh", handleRefresh)
+
+	// Start HTTP server
+	go func() {
+		fmt.Println("Starting HTTP server on :8080")
+		if err := http.ListenAndServe(":8080", nil); err != nil {
+			log.Fatal(err)
+		}
+	}()
+
+	fmt.Println("Starting Hyperscaler Status Monitor...")
+	fmt.Println("Generating reports every 5 minutes...")
+	fmt.Println("Press Ctrl+C to stop")
+
+	// Start background report generation
+	for {
+		report := generateReport()
+		reportMutex.Lock()
+		currentReport = report
+		reportMutex.Unlock()
+
+		fmt.Printf("Report generated at %s\n", report.Timestamp.Format(time.RFC3339))
+		time.Sleep(5 * time.Minute)
+	}
+}
 
 // getSystemInfo gets IP address and ping latency
 func getSystemInfo() SystemInfo {
@@ -393,51 +543,57 @@ func generateReport() StatusReport {
 
 	// Set timezone to Pacific
 	loc, _ := time.LoadLocation("America/Los_Angeles")
+
+	// Format report content
+	var contentBuilder strings.Builder
+	contentBuilder.WriteString("System Information:\n")
+	contentBuilder.WriteString(fmt.Sprintf("IP Address: %s\n", systemInfo.IPAddress))
+	contentBuilder.WriteString(fmt.Sprintf("Ping Latency: %s\n", systemInfo.PingLatency))
+	contentBuilder.WriteString(fmt.Sprintf("Last Network Check: %s\n\n", systemInfo.LastCheck.Format("15:04:05 MST")))
+
+	contentBuilder.WriteString("Provider Status:\n")
+	for _, provider := range reportProviders {
+		contentBuilder.WriteString(fmt.Sprintf("\n%s:\n", provider.Name))
+		for _, service := range provider.Services {
+			contentBuilder.WriteString(fmt.Sprintf("- %s: %s (%s)\n", service.Name, service.Status, service.Region))
+			contentBuilder.WriteString(fmt.Sprintf("  Details: %s\n", service.Details))
+			contentBuilder.WriteString(fmt.Sprintf("  Last Check: %s\n", service.LastCheck.Format("15:04:05 MST")))
+		}
+	}
+
 	return StatusReport{
 		Timestamp:  time.Now().In(loc),
 		SystemInfo: systemInfo,
 		Providers:  reportProviders,
+		Content:    contentBuilder.String(),
 	}
 }
 
-func main() {
-	// Create templates directory if it doesn't exist
-	if err := os.MkdirAll("templates", 0755); err != nil {
-		log.Fatal(err)
+func handleRoot(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" && r.FormValue("action") == "refresh" {
+		// Start generating a new report
+		go func() {
+			newReport := generateReport()
+			reportMutex.Lock()
+			currentReport = newReport
+			reportMutex.Unlock()
+		}()
+		// Return success response
+		w.WriteHeader(http.StatusOK)
+		return
 	}
 
-	// Create the HTML template file
+	reportMutex.RLock()
+	defer reportMutex.RUnlock()
+
 	tmpl, err := template.New("status").Parse(htmlTemplate)
 	if err != nil {
-		log.Fatal(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
-	fmt.Println("Starting Hyperscaler Status Monitor...")
-	fmt.Println("Generating reports every 5 minutes...")
-	fmt.Println("Press Ctrl+C to stop")
-
-	for {
-		// Generate report
-		report := generateReport()
-
-		// Create output file
-		file, err := os.Create("templates/status.html")
-		if err != nil {
-			log.Printf("Error creating file: %v", err)
-			continue
-		}
-
-		// Execute template
-		if err := tmpl.Execute(file, report); err != nil {
-			log.Printf("Error executing template: %v", err)
-			file.Close()
-			continue
-		}
-
-		file.Close()
-		fmt.Printf("Report generated at %s\n", report.Timestamp.Format(time.RFC3339))
-
-		// Wait for 5 minutes
-		time.Sleep(5 * time.Minute)
+	if err := tmpl.Execute(w, currentReport); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 }
