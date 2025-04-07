@@ -4,7 +4,20 @@ This repository contains various programming projects and learning exercises.
 
 ## Projects
 
-### 1. SystemHelper
+### 1. Equation Explorer
+An educational game that combines algebra problem-solving with maze navigation.
+
+**Features:**
+- Progressive difficulty levels focusing on 9th-grade algebra
+- Multiple equation types (linear, multi-step, literal equations, inequalities)
+- Interactive maze navigation
+- Immediate feedback and scoring system
+- Optional hints and solution steps
+- Beautiful graphical interface
+
+**Location:** `hd-gocode/equation_explorer/`
+
+### 2. SystemHelper
 A web-based system monitoring and network diagnostics tool with real-time system information.
 
 **Features:**
@@ -17,7 +30,7 @@ A web-based system monitoring and network diagnostics tool with real-time system
 
 **Location:** `hd-gocode/SystemHelper/`
 
-### 2. Hyperscaler Status Monitor
+### 3. Hyperscaler Status Monitor
 A real-time status monitoring tool for major cloud providers (Google, Oracle Cloud, and Azure) with a beautiful web interface.
 
 **Features:**
@@ -30,7 +43,7 @@ A real-time status monitoring tool for major cloud providers (Google, Oracle Clo
 
 **Location:** `hd-gocode/hyperscaler/`
 
-### 3. Website Monitor
+### 4. Website Monitor
 A Go program that monitors website status and provides real-time updates.
 
 **Features:**
@@ -40,12 +53,12 @@ A Go program that monitors website status and provides real-time updates.
 
 **Location:** `hd-gocode/website_monitor/`
 
-### 4. Go Learning Exercises
+### 5. Go Learning Exercises
 Basic Go programming exercises and examples.
 
 **Location:** `hd-gocode/`
 
-### 5. Eye Tracker
+### 6. Eye Tracker
 A computer vision application that tracks eye movements to control an on-screen block, demonstrating real-time image processing and user interaction.
 
 **Features:**
@@ -58,7 +71,7 @@ A computer vision application that tracks eye movements to control an on-screen 
 
 **Location:** `hd-gocode/eyetracker/`
 
-### 6. Spinninnpong
+### 7. Spinninnpong
 A unique twist on the classic Pong game featuring spinning paddles and dynamic ball physics.
 
 **Features:**
