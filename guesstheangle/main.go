@@ -418,6 +418,34 @@ func (g *Game) DrawPlaying() {
 	rl.DrawLineEx(q.Shape.Points[1], q.Shape.Points[2], 2, rl.Black)
 	rl.DrawLineEx(q.Shape.Points[2], q.Shape.Points[0], 2, rl.Black)
 
+	// Draw angle arc and highlight vertex
+	vertex := q.Shape.Points[2]       // The vertex we want to measure
+	rl.DrawCircleV(vertex, 5, rl.Red) // Red dot at the vertex
+
+	// Calculate vectors for the angle
+	v1 := rl.Vector2{
+		X: q.Shape.Points[0].X - vertex.X,
+		Y: q.Shape.Points[0].Y - vertex.Y,
+	}
+	v2 := rl.Vector2{
+		X: q.Shape.Points[1].X - vertex.X,
+		Y: q.Shape.Points[1].Y - vertex.Y,
+	}
+
+	// Calculate angle between vectors
+	angle := float32(math.Atan2(float64(v2.Y), float64(v2.X)) - math.Atan2(float64(v1.Y), float64(v1.X)))
+	if angle < 0 {
+		angle += 2 * float32(math.Pi)
+	}
+
+	// Draw arc
+	radius := float32(30)
+	rl.DrawCircleLines(int32(vertex.X), int32(vertex.Y), radius, rl.Red)
+	rl.DrawLineEx(vertex, rl.Vector2{
+		X: vertex.X + radius*float32(math.Cos(float64(angle))),
+		Y: vertex.Y + radius*float32(math.Sin(float64(angle))),
+	}, 2, rl.Red)
+
 	// Draw question
 	questionWidth := rl.MeasureText(q.Question, 20)
 	rl.DrawText(q.Question,
