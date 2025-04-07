@@ -1,71 +1,65 @@
 # Equation Explorer
 
-An educational game that combines algebra problem-solving with maze navigation, designed for 9th-grade students.
-
-## Overview
-
-Equation Explorer is an interactive game where players navigate through a maze by solving algebraic equations. The game progressively introduces more complex mathematical concepts while maintaining an engaging and fun experience.
+Equation Explorer is an educational game that combines maze navigation with mathematical problem-solving. Players navigate through a maze while solving various types of equations to progress and earn points.
 
 ## Features
 
-### Core Gameplay
-- Maze navigation with equation-solving obstacles
-- Progressive difficulty levels
-- Immediate feedback on solutions
-- Scoring system with bonuses for speed and accuracy
-
-### Mathematical Content
-- Linear Equations
-  - Single-variable equations
-  - Equations with integers, fractions, and decimals
-- Multi-Step Equations
-  - Multiple operations
-  - Distributive property
-- Literal Equations
-  - Solving for specific variables
-  - Formula rearrangement
-- Inequalities
-  - Solving inequalities
-  - Understanding inequality direction
-- Systems of Linear Equations (Advanced Level)
-  - Two equations with two variables
-
-### Learning Features
-- Clear equation presentation
-- Optional hints system
-- Step-by-step solution guides
-- Progress tracking
-- Difficulty level selection
-
-## Technical Details
-
-- Written in Go
-- Uses the Raylib library for graphics
-- Cross-platform support (Windows, macOS, Linux)
-
-## Getting Started
-
-1. Ensure you have Go installed on your system
-2. Clone the repository
-3. Navigate to the equation_explorer directory
-4. Run `go run main.go`
+- Procedurally generated mazes
+- Multiple types of equations based on difficulty levels:
+  - Linear equations (Level 1)
+  - Multi-step equations (Level 2)
+  - Literal equations (Level 3)
+  - Inequalities (Level 4)
+- Real-time timer tracking
+- Score system
+- Hints and solution steps
+- Immediate feedback on answers
 
 ## Controls
 
-- Arrow keys: Navigate through the maze
-- Enter: Submit equation solution
-- H: Request a hint
-- S: Show solution steps
-- ESC: Exit game
+- **SPACE**: Start game / Restart game
+- **Arrow Keys**: Navigate through the maze
+- **H**: Show hint for current equation
+- **S**: Show solution steps
+- **ESC**: Skip current equation
+- **ENTER**: Submit answer
+
+## Gameplay
+
+1. Press SPACE to start the game
+2. Navigate through the maze using arrow keys
+3. When you reach a green cell, you'll encounter an equation
+4. Solve the equation by typing your answer
+5. Get hints or solution steps if needed
+6. Earn points for correct answers
+7. Try to solve as many equations as possible while navigating the maze
+
+## Installation
+
+1. Make sure you have Go installed on your system
+2. Clone the repository:
+   ```bash
+   git clone https://github.com/hsrakri/hd-gocode.git
+   ```
+3. Navigate to the game directory:
+   ```bash
+   cd hd-gocode/equation_explorer
+   ```
+4. Run the game:
+   ```bash
+   go run main.go
+   ```
+
+## Dependencies
+
+- [raylib-go](https://github.com/gen2brain/raylib-go) - Game development library
 
 ## Development
 
-The project is structured as follows:
-- `main.go`: Main game loop and initialization
-- `equation/`: Equation generation and validation
+The game is structured into three main packages:
+- `main.go`: Main game loop and rendering
+- `equation/`: Equation generation and solving logic
 - `maze/`: Maze generation and navigation
-- `ui/`: User interface components
-- `game/`: Core game logic
 
 ## License
 
