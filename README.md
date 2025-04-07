@@ -1,23 +1,37 @@
-# Code Projects
+# Haaris's Go Code Projects
 
-This repository contains various programming projects and learning exercises.
+Welcome to my collection of Go programming projects! This repository contains various applications and games developed using Go.
 
 ## Projects
 
 ### 1. Equation Explorer
-An educational game that combines algebra problem-solving with maze navigation.
+A game that combines maze navigation with equation solving. Players navigate through a maze while solving mathematical equations to progress.
 
 **Features:**
-- Progressive difficulty levels focusing on 9th-grade algebra
-- Multiple equation types (linear, multi-step, literal equations, inequalities)
-- Interactive maze navigation
-- Immediate feedback and scoring system
-- Optional hints and solution steps
-- Beautiful graphical interface
+- Dynamic maze generation
+- Equation solving challenges
+- Score tracking
+- Multiple difficulty levels
+- Timer functionality
 
-**Location:** `hd-gocode/equation_explorer/`
+[View Equation Explorer](equation_explorer/)
 
-### 2. SystemHelper
+### 2. Guess the Angle
+An educational game that helps players practice angle estimation in geometric shapes.
+
+**Features:**
+- 10 angle estimation challenges
+- Visual representations of triangles
+- ±5 degrees tolerance for correct answers
+- Three attempts per question
+- Real-time feedback
+- Score and time tracking
+- Top 10 leaderboard
+- Player name registration
+
+[View Guess the Angle](guesstheangle/)
+
+### 3. SystemHelper
 A web-based system monitoring and network diagnostics tool with real-time system information.
 
 **Features:**
@@ -30,7 +44,7 @@ A web-based system monitoring and network diagnostics tool with real-time system
 
 **Location:** `hd-gocode/SystemHelper/`
 
-### 3. Hyperscaler Status Monitor
+### 4. Hyperscaler Status Monitor
 A real-time status monitoring tool for major cloud providers (Google, Oracle Cloud, and Azure) with a beautiful web interface.
 
 **Features:**
@@ -43,7 +57,7 @@ A real-time status monitoring tool for major cloud providers (Google, Oracle Clo
 
 **Location:** `hd-gocode/hyperscaler/`
 
-### 4. Website Monitor
+### 5. Website Monitor
 A Go program that monitors website status and provides real-time updates.
 
 **Features:**
@@ -53,12 +67,12 @@ A Go program that monitors website status and provides real-time updates.
 
 **Location:** `hd-gocode/website_monitor/`
 
-### 5. Go Learning Exercises
+### 6. Go Learning Exercises
 Basic Go programming exercises and examples.
 
 **Location:** `hd-gocode/`
 
-### 6. Eye Tracker
+### 7. Eye Tracker
 A computer vision application that tracks eye movements to control an on-screen block, demonstrating real-time image processing and user interaction.
 
 **Features:**
@@ -71,7 +85,7 @@ A computer vision application that tracks eye movements to control an on-screen 
 
 **Location:** `hd-gocode/eyetracker/`
 
-### 7. Spinninnpong
+### 8. Spinninnpong
 A unique twist on the classic Pong game featuring spinning paddles and dynamic ball physics.
 
 **Features:**
@@ -85,7 +99,26 @@ A unique twist on the classic Pong game featuring spinning paddles and dynamic b
 
 ## Getting Started
 
-Each project has its own README with specific instructions. Navigate to the project directory for detailed information.
+Each project has its own directory with specific instructions for running and playing. Navigate to the project directory and follow the README instructions.
+
+## Requirements
+
+- Go 1.21 or later
+- Raylib library (for games)
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/hsrakri/hd-gocode.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd hd-gocode
+   ```
+
+3. Follow the specific instructions in each project's README to run the application.
 
 ## License
 
