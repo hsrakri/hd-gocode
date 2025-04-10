@@ -19,6 +19,11 @@ A fast-paced multiplication game where you race against time to find missing fac
 - [Play Multiplication Tumbler](multiplicationtumbler/)
 - Features: 60-second timer, random problems, immediate feedback
 
+### 4. Number Banana
+Discover fascinating facts about any number! Learn mathematical properties, historical events, and fun trivia.
+- [Play Number Banana](numberbanana/)
+- Features: Real-time fact lookup, multiple categories, instant feedback
+
 ## Installation
 
 Each game can be run independently. Navigate to the game's directory and follow the installation instructions in its README.
