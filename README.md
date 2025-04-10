@@ -1,124 +1,40 @@
-# Haaris's Go Code Projects
+# Educational Game Collection
 
-Welcome to my collection of Go programming projects! This repository contains various applications and games developed using Go.
+A collection of interactive educational games built with Go, focusing on mathematics and problem-solving skills.
 
-## Projects
+## Games
 
 ### 1. Equation Explorer
-A game that combines maze navigation with equation solving. Players navigate through a maze while solving mathematical equations to progress.
-
-**Features:**
-- Dynamic maze generation
-- Equation solving challenges
-- Score tracking
-- Multiple difficulty levels
-- Timer functionality
-
-[View Equation Explorer](equation_explorer/)
+Navigate through mazes while solving equations! This game combines spatial reasoning with algebraic problem-solving.
+- [Play Equation Explorer](equation_explorer/)
+- Features: Maze navigation, equation solving, progressive difficulty
 
 ### 2. Guess the Angle
-An educational game that helps players practice angle estimation in geometric shapes.
+Test your geometric intuition by estimating angles in various shapes.
+- [Play Guess the Angle](guesstheangle/)
+- Features: Angle estimation, visual feedback, score tracking
 
-**Features:**
-- 10 angle estimation challenges
-- Visual representations of triangles
-- ±5 degrees tolerance for correct answers
-- Three attempts per question
-- Real-time feedback
-- Score and time tracking
-- Top 10 leaderboard
-- Player name registration
-
-[View Guess the Angle](guesstheangle/)
-
-### 3. SystemHelper
-A web-based system monitoring and network diagnostics tool with real-time system information.
-
-**Features:**
-- Real-time CPU and Memory usage monitoring
-- Process inspection and management
-- Network port monitoring
-- Network diagnostics (ping, MTR, DNS)
-- Beautiful web interface with auto-refresh
-- Cross-platform support (macOS/Linux)
-
-**Location:** `hd-gocode/SystemHelper/`
-
-### 4. Hyperscaler Status Monitor
-A real-time status monitoring tool for major cloud providers (Google, Oracle Cloud, and Azure) with a beautiful web interface.
-
-**Features:**
-- Real-time status monitoring of cloud providers
-- System information display (IP, network latency)
-- Beautiful web interface with auto-refresh
-- Manual refresh capability
-- Detailed service status reports
-- Concurrent status checking
-
-**Location:** `hd-gocode/hyperscaler/`
-
-### 5. Website Monitor
-A Go program that monitors website status and provides real-time updates.
-
-**Features:**
-- Website availability checking
-- Status reporting
-- Real-time updates
-
-**Location:** `hd-gocode/website_monitor/`
-
-### 6. Go Learning Exercises
-Basic Go programming exercises and examples.
-
-**Location:** `hd-gocode/`
-
-### 7. Eye Tracker
-A computer vision application that tracks eye movements to control an on-screen block, demonstrating real-time image processing and user interaction.
-
-**Features:**
-- Real-time eye tracking using webcam
-- Interactive block movement based on eye position
-- Face and eye detection using OpenCV
-- Cross-platform support (macOS/Linux)
-- Adjustable tracking sensitivity
-- Visual feedback and debugging tools
-
-**Location:** `hd-gocode/eyetracker/`
-
-### 8. Spinninnpong
-A unique twist on the classic Pong game featuring spinning paddles and dynamic ball physics.
-
-**Features:**
-- Spinning paddles that add variable spin effects
-- Real-time physics calculations
-- Progressive difficulty system
-- Two-player keyboard controls
-- Clean, minimalist graphics
-
-**Location:** `hd-gocode/spinninnpong/`
-
-## Getting Started
-
-Each project has its own directory with specific instructions for running and playing. Navigate to the project directory and follow the README instructions.
-
-## Requirements
-
-- Go 1.21 or later
-- Raylib library (for games)
+### 3. Multiplication Tumbler
+A fast-paced multiplication game where you race against time to find missing factors!
+- [Play Multiplication Tumbler](multiplicationtumbler/)
+- Features: 60-second timer, random problems, immediate feedback
 
 ## Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/hsrakri/hd-gocode.git
-   ```
+Each game can be run independently. Navigate to the game's directory and follow the installation instructions in its README.
 
-2. Navigate to the project directory:
-   ```bash
-   cd hd-gocode
-   ```
+## Dependencies
 
-3. Follow the specific instructions in each project's README to run the application.
+- Go 1.21 or later
+- Raylib-go library for graphics
+- Additional dependencies listed in each game's README
+
+## Contributing
+
+Feel free to contribute by:
+1. Reporting bugs
+2. Suggesting new features
+3. Submitting pull requests
 
 ## License
 
