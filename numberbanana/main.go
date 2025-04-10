@@ -37,6 +37,8 @@ func NewGame() *Game {
 func (g *Game) fetchNumberFact(number string) {
 	g.isSearching = true
 	g.errorMessage = ""
+	// Clear previous facts
+	g.facts = make([]string, 0)
 
 	// Try different APIs for number facts
 	apis := []string{
@@ -59,7 +61,7 @@ func (g *Game) fetchNumberFact(number string) {
 		}
 
 		fact := string(body)
-		if fact != "" && !strings.Contains(fact.ToLower(), "error") {
+		if fact != "" && !strings.Contains(strings.ToLower(fact), "error") {
 			g.facts = append(g.facts, fact)
 		}
 	}
