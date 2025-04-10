@@ -37,11 +37,28 @@ func (g *Game) generateNewProblem() {
 	g.number1 = int32(rand.Intn(12) + 1)
 	g.number2 = int32(rand.Intn(12) + 1)
 	g.result = g.number1 * g.number2
+
+	// Store the hidden number before swapping
+	hiddenNumber := g.number2
+
 	// Randomly decide which number to hide (1 or 2)
 	if rand.Float32() < 0.5 {
-		g.number1, g.number2 = g.number2, g.number1 // Swap numbers
+		// If we're hiding number1, swap the numbers
+		g.number1, g.number2 = g.number2, g.number1
+		hiddenNumber = g.number1
 	}
-	g.number2 = -1 // Hide the second number
+
+	// Store the visible number for comparison
+	visibleNumber := g.number1
+	if rand.Float32() < 0.5 {
+		visibleNumber = g.number2
+		g.number1, g.number2 = g.number2, g.number1
+	}
+
+	// Set up the problem
+	g.number2 = hiddenNumber  // This is the number player needs to guess
+	g.number1 = visibleNumber // This is the number shown
+	g.result = g.number1 * hiddenNumber
 }
 
 func (g *Game) handleInput() {
@@ -66,7 +83,8 @@ func (g *Game) handleInput() {
 				g.message = "Correct!"
 				g.messageTime = 1.0
 			} else {
-				g.message = fmt.Sprintf("Wrong! It was %d", g.number2)
+				g.message = fmt.Sprintf("Wrong! It was %d (%d × %d = %d)",
+					g.number2, g.number1, g.number2, g.result)
 				g.messageTime = 1.0
 			}
 			g.userInput = ""
@@ -114,12 +132,7 @@ func (g *Game) draw() {
 	rl.DrawText(scoreText, screenWidth-200, 10, 30, rl.DarkGray)
 
 	// Draw problem
-	var problemText string
-	if g.number2 == -1 {
-		problemText = fmt.Sprintf("%d × ? = %d", g.number1, g.result)
-	} else {
-		problemText = fmt.Sprintf("? × %d = %d", g.number2, g.result)
-	}
+	problemText := fmt.Sprintf("%d × ? = %d", g.number1, g.result)
 	rl.DrawText(problemText, screenWidth/2-rl.MeasureText(problemText, fontSize)/2, screenHeight/2-50, fontSize, rl.Black)
 
 	// Draw user input
