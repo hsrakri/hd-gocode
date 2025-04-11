@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equation Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>Equation Explorer</h1>
+            <div class="stats">
+                <span id="score">Score: 0</span>
+                <span id="timer">Time: 0:00</span>
+                <span id="level">Level: 1</span>
+            </div>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+        <div class="equation-panel">
+            <div id="equation">Solve: x + 5 = 10</div>
+            <input type="number" id="answer" placeholder="Enter your answer">
+            <button id="submit">Submit</button>
+        </div>
+        <div id="message"></div>
+        <div class="controls">
+            <div class="control-info">
+                <p>Use arrow keys to move</p>
+                <p>Space to interact</p>
+            </div>
+        </div>
+    </div>
+    <div id="startScreen" class="overlay">
+        <div class="start-content">
+            <h1>Equation Explorer</h1>
+            <p>Navigate through the maze and solve equations to advance!</p>
+            <button id="startButton">Start Game</button>
+            <div class="instructions">
+                <h2>How to Play:</h2>
+                <ul>
+                    <li>Use arrow keys to move through the maze</li>
+                    <li>Find and solve equations to unlock paths</li>
+                    <li>Collect power-ups for bonus points</li>
+                    <li>Complete each level within the time limit</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="gameOverScreen" class="overlay hidden">
+        <div class="game-over-content">
+            <h1>Game Over!</h1>
+            <div id="finalScore"></div>
+            <button id="restartButton">Play Again</button>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html> 
