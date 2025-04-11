@@ -1,46 +1,29 @@
-# Educational Game Collection
+# HD Code Games Collection
 
-A collection of interactive educational games built with Go, focusing on mathematics and problem-solving skills.
+A collection of educational math games designed to make learning fun and interactive.
 
-## Games
+## Addition Bulldozer
 
-### 1. Equation Explorer
-Navigate through mazes while solving equations! This game combines spatial reasoning with algebraic problem-solving.
-- [Play Equation Explorer](equation_explorer/)
-- Features: Maze navigation, equation solving, progressive difficulty
+Race against time to solve addition problems while managing a growing skyscraper! The game features:
 
-### 2. Guess the Angle
-Test your geometric intuition by estimating angles in various shapes.
-- [Play Guess the Angle](guesstheangle/)
-- Features: Angle estimation, visual feedback, score tracking
+- Dynamic difficulty that increases every 4 correct answers
+- Real-time building visualization
+- Score tracking and level progression
+- Animated floor management
+- Time pressure mechanics
 
-### 3. Multiplication Tumbler
-A fast-paced multiplication game where you race against time to find missing factors!
-- [Play Multiplication Tumbler](multiplicationtumbler/)
-- Features: 60-second timer, random problems, immediate feedback
+### How to Play
+1. Solve the addition problem shown in the left panel
+2. Enter your answer and press Enter or click "Check Answer"
+3. Correct answers remove a floor from the building
+4. A new floor is added every 5 seconds
+5. Game ends if the building reaches 10 floors
+6. Problems get harder as you level up (every 4 correct answers)
 
-### 4. Number Banana
-Discover fascinating facts about any number! Learn mathematical properties, historical events, and fun trivia.
-- [Play Number Banana](numberbanana/)
-- Features: Real-time fact lookup, multiple categories, instant feedback
+### Scoring
+- Points are awarded based on your current level
+- Each correct answer gives you (level × 10) points
+- Try to get the highest score possible!
 
-## Installation
-
-Each game can be run independently. Navigate to the game's directory and follow the installation instructions in its README.
-
-## Dependencies
-
-- Go 1.21 or later
-- Raylib-go library for graphics
-- Additional dependencies listed in each game's README
-
-## Contributing
-
-Feel free to contribute by:
-1. Reporting bugs
-2. Suggesting new features
-3. Submitting pull requests
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details. 
+## Play the Games
+Open the HTML files directly in your browser to play the games! 
