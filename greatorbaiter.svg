@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect x="0" y="0" width="800" height="400" fill="#1a1a2e"/>
+    
+    <!-- Game container -->
+    <rect x="50" y="50" width="700" height="300" rx="15" fill="rgba(255,255,255,0.1)"/>
+    
+    <!-- Game header -->
+    <text x="100" y="100" fill="#fff" font-family="Inter" font-size="24">Score: 120</text>
+    <text x="400" y="100" fill="#fff" font-family="Inter" font-size="24">Time: 4s</text>
+    <text x="650" y="100" fill="#fff" font-family="Inter" font-size="24">Level: 2</text>
+    
+    <!-- Number boxes -->
+    <rect x="150" y="150" width="200" height="150" rx="10" fill="rgba(255,255,255,0.15)"/>
+    <text x="250" y="240" fill="#fff" font-family="Inter" font-size="48" text-anchor="middle">847</text>
+    
+    <text x="400" y="240" fill="#4ecca3" font-family="Inter" font-size="36" text-anchor="middle">VS</text>
+    
+    <rect x="450" y="150" width="200" height="150" rx="10" fill="rgba(255,255,255,0.15)"/>
+    <text x="550" y="240" fill="#fff" font-family="Inter" font-size="48" text-anchor="middle">692</text>
+</svg> 
